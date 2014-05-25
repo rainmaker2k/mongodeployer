@@ -18,4 +18,27 @@ public class Component extends RepositoryItem {
     private Map<String, Object> fields;
     private Map<String, Object> metadataFields;
 
+    public Map<String, Object> getFields() {
+        return fields;
+    }
+
+    public void setFields(Map<String, Object> fields) {
+        this.fields = fields;
+    }
+
+    public Map<String, Object> getMetadataFields() {
+        return metadataFields;
+    }
+
+    public void setMetadataFields(Map<String, Object> metadataFields) {
+        this.metadataFields = metadataFields;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 }
