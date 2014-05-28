@@ -15,6 +15,8 @@ public class Component extends RepositoryItem {
     @Id
     private ObjectId id;
 
+    private ObjectId schemaId;
+
     private Map<String, Object> fields;
     private Map<String, Object> metadataFields;
 

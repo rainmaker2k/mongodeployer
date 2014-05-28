@@ -17,14 +17,21 @@
     <bean id="componentDao" class="me.kahwah.dao.impl.ComponentDAOImpl">
         <constructor-arg ref="mongo" index="0"></constructor-arg>
         <constructor-arg ref="morphia" index="1"></constructor-arg>
+        <constructor-arg ref="dbName" index="2"></constructor-arg>
     </bean>
 
     <bean id="pageDao" class="me.kahwah.dao.impl.PageDAOImpl">
+        <constructor-arg ref="mongo" index="0"></constructor-arg>
+        <constructor-arg ref="morphia" index="1"></constructor-arg>
+        <constructor-arg ref="dbName" index="2"></constructor-arg>
     </bean>
 
     <bean id="mongo" class="com.mongodb.Mongo">
     </bean>
     <bean id="morphia" class="org.mongodb.morphia.Morphia">
+    </bean>
 
+    <bean id="dbName" class="java.lang.String">
+        <constructor-arg value="dd4t" />
     </bean>
 </beans>

@@ -41,5 +41,9 @@
         <groupId>org.mongodb.morphia</groupId>
         <artifactId>morphia</artifactId>
       </dependency>
+      <dependency>
+          <groupId>commons-configuration</groupId>
+          <artifactId>commons-configuration</artifactId>
+      </dependency>
   </dependencies>
 </project>

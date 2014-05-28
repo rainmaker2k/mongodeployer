@@ -13,16 +13,8 @@ import java.util.List;
  */
 public abstract class ComponentDAO extends BasicDAO<Component, ObjectId> {
 
-//    public ComponentDAO(Class<Component> entityClass, Mongo mongo, Morphia morphia, String dbName) {
-//        super(entityClass, mongo, morphia, dbName);
-//    }
-
     public ComponentDAO(Mongo mongo, Morphia morphia, String dbName) {
         super(Component.class, mongo, morphia, dbName);
     }
-
-    public abstract Component findOneByQuery(String query);
-
-    public abstract List<Component> findByQuery(String query);
 
 }

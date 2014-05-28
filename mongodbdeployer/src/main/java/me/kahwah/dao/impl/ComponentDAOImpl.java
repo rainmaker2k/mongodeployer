@@ -16,17 +16,8 @@ import java.util.List;
 public class ComponentDAOImpl extends ComponentDAO {
 
 
-    public ComponentDAOImpl(Mongo mongo, Morphia morphia) {
-        super(mongo, morphia, "dd4t");
+    public ComponentDAOImpl(Mongo mongo, Morphia morphia, String dbName) {
+        super(mongo, morphia, dbName);
     }
 
-    @Override
-    public Component findOneByQuery(String query) {
-        return null;
-    }
-
-    @Override
-    public List<Component> findByQuery(String query) {
-        return null;
-    }
 }
