@@ -7,6 +7,7 @@ public abstract class RepositoryItem {
 
     private long publicationId;
     private long itemId;
+    private String title;
 
     public long getPublicationId() {
         return publicationId;
@@ -22,5 +23,13 @@ public abstract class RepositoryItem {
 
     public void setItemId(long itemId) {
         this.itemId = itemId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

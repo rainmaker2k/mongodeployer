@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -14,9 +15,7 @@ public class Component extends RepositoryItem {
 
     @Id
     private ObjectId id;
-
     private ObjectId schemaId;
-
     private Map<String, Object> fields;
     private Map<String, Object> metadataFields;
 
@@ -42,5 +41,13 @@ public class Component extends RepositoryItem {
 
     public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public ObjectId getSchemaId() {
+        return schemaId;
+    }
+
+    public void setSchemaId(ObjectId schemaId) {
+        this.schemaId = schemaId;
     }
 }
