@@ -9,23 +9,23 @@ import java.util.Date;
  */
 public class ComponentPresentation {
 
-    private ObjectId component;
+    private Component component;
     private Date lastPublishDate;
-    private ObjectId componentTemplate;
+    private ComponentTemplate componentTemplate;
 
-    public ObjectId getComponent() {
+    public Component getComponent() {
         return component;
     }
 
-    public void setComponent(ObjectId component) {
+    public void setComponent(Component component) {
         this.component = component;
     }
 
-    public ObjectId getComponentTemplate() {
+    public ComponentTemplate getComponentTemplate() {
         return componentTemplate;
     }
 
-    public void setComponentTemplate(ObjectId componentTemplate) {
+    public void setComponentTemplate(ComponentTemplate componentTemplate) {
         this.componentTemplate = componentTemplate;
     }
 

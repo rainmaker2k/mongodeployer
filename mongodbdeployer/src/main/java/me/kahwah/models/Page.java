@@ -17,7 +17,7 @@ public class Page extends RepositoryItem {
 
     private Map<String, Object> metadataFields;
 
-    private List<ObjectId> componentPresentations;
+    private List<ComponentPresentation> componentPresentations;
 
     public Date getLastPublishDate() {
         return lastPublishDate;
@@ -41,5 +41,21 @@ public class Page extends RepositoryItem {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Map<String, Object> getMetadataFields() {
+        return metadataFields;
+    }
+
+    public void setMetadataFields(Map<String, Object> metadataFields) {
+        this.metadataFields = metadataFields;
+    }
+
+    public List<ComponentPresentation> getComponentPresentations() {
+        return componentPresentations;
+    }
+
+    public void setComponentPresentations(List<ComponentPresentation> componentPresentations) {
+        this.componentPresentations = componentPresentations;
     }
 }

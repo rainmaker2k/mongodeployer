@@ -5,8 +5,6 @@ import me.kahwah.dao.PageDAO;
 import me.kahwah.models.Page;
 import org.mongodb.morphia.Morphia;
 
-import java.util.List;
-
 /**
  * Created by rainmaker2k on 24/05/14.
  */
@@ -17,17 +15,7 @@ public class PageDAOImpl extends PageDAO {
     }
 
     @Override
-    public Page findOneByQuery(String query) {
-        return null;
-    }
-
-    @Override
-    public List<Page> findByQuery() {
-        return null;
-    }
-
-    @Override
     public Page findByUrl(String url) {
-        return null;
+        return getDs().createQuery(Page.class).field("url").equal(url).get();
     }
 }
