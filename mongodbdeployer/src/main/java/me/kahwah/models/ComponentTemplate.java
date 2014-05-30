@@ -1,5 +1,8 @@
 package me.kahwah.models;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Id;
+
 import java.util.Map;
 
 /**
@@ -7,6 +10,9 @@ import java.util.Map;
  */
 
 public class ComponentTemplate extends RepositoryItem {
+
+    @Id
+    private ObjectId id;
 
     private Map<String, Object> metadataFields;
 

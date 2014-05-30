@@ -29,6 +29,8 @@ public class App
 
         deployer.getComponentDao().save(component);
 
+        System.out.println("Config: " + deployer.getConfig().getString("database"));
+
         System.out.println( "Hello World!" );
     }
 }

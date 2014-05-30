@@ -1,6 +1,7 @@
 package me.kahwah.models;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Id;
 
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,9 @@ import java.util.Map;
  * Created by rainmaker2k on 29-5-2014.
  */
 public class Keyword extends RepositoryItem {
+    @Id
+    private ObjectId id;
+
     private String key;
     private Map<String, Object> metadataFields;
     private List<ObjectId> children;

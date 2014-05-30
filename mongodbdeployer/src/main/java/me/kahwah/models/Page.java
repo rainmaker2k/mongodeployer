@@ -1,6 +1,7 @@
 package me.kahwah.models;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Id;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.Map;
  */
 public class Page extends RepositoryItem {
 
+    @Id
+    private ObjectId id;
     private Date lastPublishDate;
     private String filename;
     private String url;
@@ -57,5 +60,13 @@ public class Page extends RepositoryItem {
 
     public void setComponentPresentations(List<ComponentPresentation> componentPresentations) {
         this.componentPresentations = componentPresentations;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 }

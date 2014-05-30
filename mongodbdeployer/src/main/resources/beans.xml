@@ -10,6 +10,7 @@
         <property name="pageDao" ref="pageDao" />
         <property name="keywordDao" ref="keywordDao" />
         <property name="componentPresentationDao" ref="componentPresentationDao" />
+        <property name="config" ref="xmlConfig" />
     </bean>
 
     <bean id="componentDao" class="me.kahwah.dao.impl.ComponentDAOImpl">
@@ -42,6 +43,12 @@
     </bean>
 
     <bean id="dbName" class="java.lang.String">
-        <constructor-arg value="dd4t" />
+        <constructor-arg value="#{xmlConfig.getString('database')}" />
+    </bean>
+
+    <bean id="xmlConfig" class="org.apache.commons.configuration.XMLConfiguration">
+        <constructor-arg type="java.lang.String">
+            <value>config.xml</value>
+        </constructor-arg>
     </bean>
 </beans>

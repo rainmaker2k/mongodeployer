@@ -4,6 +4,7 @@ import me.kahwah.dao.ComponentDAO;
 import me.kahwah.dao.ComponentPresentationDAO;
 import me.kahwah.dao.KeywordDAO;
 import me.kahwah.dao.PageDAO;
+import org.apache.commons.configuration.XMLConfiguration;
 
 /**
  * Created by rainmaker2k on 23/05/14.
@@ -12,12 +13,10 @@ import me.kahwah.dao.PageDAO;
 public class Deployer {
 
     private ComponentDAO componentDao;
-
     private PageDAO pageDao;
-
     private ComponentPresentationDAO componentPresentationDao;
-
     private KeywordDAO keywordDao;
+    private XMLConfiguration config;
 
     public ComponentDAO getComponentDao() {
         return componentDao;
@@ -49,5 +48,13 @@ public class Deployer {
 
     public void setComponentPresentationDao(ComponentPresentationDAO componentPresentationDao) {
         this.componentPresentationDao = componentPresentationDao;
+    }
+
+    public XMLConfiguration getConfig() {
+        return config;
+    }
+
+    public void setConfig(XMLConfiguration config) {
+        this.config = config;
     }
 }
