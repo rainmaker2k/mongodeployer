@@ -1,6 +1,8 @@
 package me.kahwah.deployer;
 
 import me.kahwah.dao.ComponentDAO;
+import me.kahwah.dao.ComponentPresentationDAO;
+import me.kahwah.dao.KeywordDAO;
 import me.kahwah.dao.PageDAO;
 
 /**
@@ -12,6 +14,10 @@ public class Deployer {
     private ComponentDAO componentDao;
 
     private PageDAO pageDao;
+
+    private ComponentPresentationDAO componentPresentationDao;
+
+    private KeywordDAO keywordDao;
 
     public ComponentDAO getComponentDao() {
         return componentDao;
@@ -27,5 +33,21 @@ public class Deployer {
 
     public void setPageDao(PageDAO pageDao) {
         this.pageDao = pageDao;
+    }
+
+    public KeywordDAO getKeywordDao() {
+        return keywordDao;
+    }
+
+    public void setKeywordDao(KeywordDAO keywordDao) {
+        this.keywordDao = keywordDao;
+    }
+
+    public ComponentPresentationDAO getComponentPresentationDao() {
+        return componentPresentationDao;
+    }
+
+    public void setComponentPresentationDao(ComponentPresentationDAO componentPresentationDao) {
+        this.componentPresentationDao = componentPresentationDao;
     }
 }

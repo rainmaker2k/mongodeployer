@@ -6,12 +6,10 @@
 
     <bean id="deployer"
           class="me.kahwah.deployer.Deployer">
-        <property name="componentDao">
-            <ref bean="componentDao"></ref>
-        </property>
-        <property name="pageDao">
-            <ref bean="pageDao"></ref>
-        </property>
+        <property name="componentDao" ref="componentDao" />
+        <property name="pageDao" ref="pageDao" />
+        <property name="keywordDao" ref="keywordDao" />
+        <property name="componentPresentationDao" ref="componentPresentationDao" />
     </bean>
 
     <bean id="componentDao" class="me.kahwah.dao.impl.ComponentDAOImpl">
@@ -21,6 +19,18 @@
     </bean>
 
     <bean id="pageDao" class="me.kahwah.dao.impl.PageDAOImpl">
+        <constructor-arg ref="mongo" index="0"></constructor-arg>
+        <constructor-arg ref="morphia" index="1"></constructor-arg>
+        <constructor-arg ref="dbName" index="2"></constructor-arg>
+    </bean>
+
+    <bean id="keywordDao" class="me.kahwah.dao.impl.KeywordDAOImpl">
+        <constructor-arg ref="mongo" index="0"></constructor-arg>
+        <constructor-arg ref="morphia" index="1"></constructor-arg>
+        <constructor-arg ref="dbName" index="2"></constructor-arg>
+    </bean>
+
+    <bean id="componentPresentationDao" class="me.kahwah.dao.impl.ComponentPresentationDAOImpl">
         <constructor-arg ref="mongo" index="0"></constructor-arg>
         <constructor-arg ref="morphia" index="1"></constructor-arg>
         <constructor-arg ref="dbName" index="2"></constructor-arg>
