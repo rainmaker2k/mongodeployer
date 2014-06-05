@@ -1,3 +1,4 @@
 <configuration>
     <database>dd4t</database>
+    <incominglocation></incominglocation>
 </configuration>

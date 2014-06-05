@@ -1,4 +1,4 @@
-# Mongodb Deployer for the SDL Tridion broker
+# MongBroke for Tridion
 This project's goal is to create an open source Tridion Content Broker that can deploy DD4T deployment packages into a MongoDB database repository. 
 It's aim is to create an alternative Content Broker that is both faster and easier to query than the Content Broker that comes out of the box.  
 
