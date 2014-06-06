@@ -10,6 +10,9 @@
   <packaging>pom</packaging>
   <name>MongoDB deployer for Tridion parent project</name>
 
+    <modules>
+        <module>mongodeployer</module>
+    </modules>
   <build>
     <pluginManagement>
       <plugins>

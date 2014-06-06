@@ -7,7 +7,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/mongodbdeployer/pom.xml" />
+        <option value="$PROJECT_DIR$/mongodeployer/pom.xml" />
       </list>
     </option>
   </component>
