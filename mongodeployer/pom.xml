@@ -10,7 +10,7 @@
       <groupId>me.kahwah</groupId>
       <artifactId>mongodeployerparent</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <relativePath>../pom.xml</relativePath>
+      <!--<relativePath>../pom.xml</relativePath>-->
   </parent>
 
   <name>mongodbdeployer</name>

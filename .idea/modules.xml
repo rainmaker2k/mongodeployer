@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/dd4t-core/dd4t-core.iml" filepath="$PROJECT_DIR$/dd4t-core/dd4t-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/mongodeployer/mongodeployer.iml" filepath="$PROJECT_DIR$/mongodeployer/mongodeployer.iml" />
       <module fileurl="file://$PROJECT_DIR$/mongodeployerparent.iml" filepath="$PROJECT_DIR$/mongodeployerparent.iml" />
     </modules>
