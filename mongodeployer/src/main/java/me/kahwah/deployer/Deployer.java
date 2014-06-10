@@ -17,6 +17,7 @@ public class Deployer {
     private ComponentPresentationDAO componentPresentationDao;
     private KeywordDAO keywordDao;
     private XMLConfiguration config;
+    private Processor processor;
 
     public ComponentDAO getComponentDao() {
         return componentDao;
@@ -56,5 +57,13 @@ public class Deployer {
 
     public void setConfig(XMLConfiguration config) {
         this.config = config;
+    }
+
+    public Processor getProcessor() {
+        return processor;
+    }
+
+    public void setProcessor(Processor processor) {
+        this.processor = processor;
     }
 }

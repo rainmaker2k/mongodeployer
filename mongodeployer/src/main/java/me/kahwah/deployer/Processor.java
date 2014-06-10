@@ -8,26 +8,7 @@ import java.io.File;
 /**
  * Created by rainmaker2k on 10-06-14.
  */
-public class Processor {
+public interface Processor {
 
-    private Serializer serializer;
-
-    public void process(File file) {
-        Component component;
-        try {
-            component = (Component)serializer.deserialize(file, Component.class);
-
-            System.out.println(component.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Serializer getSerializer() {
-        return serializer;
-    }
-
-    public void setSerializer(Serializer serializer) {
-        this.serializer = serializer;
-    }
+    void process(File file);
 }

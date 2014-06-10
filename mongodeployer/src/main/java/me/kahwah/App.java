@@ -59,13 +59,13 @@ public class App
             Path dir = FileSystems.getDefault().getPath("incoming");
             DirectoryStream<Path> files = Files.newDirectoryStream(dir);
             for (Path existingFile : files) {
+                System.out.println(existingFile.toString());
+
                 File file = existingFile.toFile();
 
-                Processor proc = new Processor();
-                proc.setSerializer(new DefaultSerializer());
+                Processor proc = deployer.getProcessor();
                 proc.process(file);
 
-                System.out.println(existingFile.toString());
             }
             dir.register(watcher, ENTRY_CREATE);
 

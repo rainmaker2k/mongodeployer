@@ -11,6 +11,7 @@
         <property name="keywordDao" ref="keywordDao" />
         <property name="componentPresentationDao" ref="componentPresentationDao" />
         <property name="config" ref="xmlConfig" />
+        <property name="processor" ref="processor" />
     </bean>
 
     <bean id="componentDao" class="me.kahwah.dao.impl.ComponentDAOImpl">
@@ -40,6 +41,13 @@
     <bean id="mongo" class="com.mongodb.Mongo">
     </bean>
     <bean id="morphia" class="org.mongodb.morphia.Morphia">
+    </bean>
+
+    <bean id="dd4tSerializer" class="me.kahwah.dd4t.core.serializers.impl.DefaultSerializer">
+    </bean>
+
+    <bean id="processor" class="me.kahwah.deployer.impl.ProcessorImpl">
+        <property name="serializer" ref="dd4tSerializer"></property>
     </bean>
 
     <bean id="dbName" class="java.lang.String">
