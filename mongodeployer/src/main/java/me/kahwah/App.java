@@ -1,10 +1,13 @@
 package me.kahwah;
 
+import me.kahwah.dd4t.core.serializers.impl.DefaultSerializer;
 import me.kahwah.deployer.Deployer;
+import me.kahwah.deployer.Processor;
 import me.kahwah.models.Component;
 import org.mongodb.morphia.query.Query;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Date;
@@ -56,6 +59,12 @@ public class App
             Path dir = FileSystems.getDefault().getPath("incoming");
             DirectoryStream<Path> files = Files.newDirectoryStream(dir);
             for (Path existingFile : files) {
+                File file = existingFile.toFile();
+
+                Processor proc = new Processor();
+                proc.setSerializer(new DefaultSerializer());
+                proc.process(file);
+
                 System.out.println(existingFile.toString());
             }
             dir.register(watcher, ENTRY_CREATE);

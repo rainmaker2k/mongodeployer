@@ -53,6 +53,9 @@
           <groupId>commons-collections</groupId>
           <artifactId>commons-collections</artifactId>
       </dependency>
-
+      <dependency>
+          <groupId>me.kahwah</groupId>
+          <artifactId>dd4t-core</artifactId>
+      </dependency>
   </dependencies>
 </project>
