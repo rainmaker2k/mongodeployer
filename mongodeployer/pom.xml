@@ -57,5 +57,14 @@
           <groupId>me.kahwah</groupId>
           <artifactId>dd4t-core</artifactId>
       </dependency>
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-simple</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.simpleframework</groupId>
+          <artifactId>simple-xml</artifactId>
+          <scope>runtime</scope>
+      </dependency>
   </dependencies>
 </project>

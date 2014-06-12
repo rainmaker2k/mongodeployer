@@ -1,55 +1,52 @@
 package me.kahwah;
 
-import me.kahwah.dd4t.core.serializers.impl.DefaultSerializer;
 import me.kahwah.deployer.Deployer;
 import me.kahwah.deployer.Processor;
-import me.kahwah.models.Component;
-import org.mongodb.morphia.query.Query;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-import static java.nio.file.StandardWatchEventKinds.*;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
+import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
 /**
  * Hello world!
  *
  */
-public class App 
-{
+public class App {
+
+    private static org.slf4j.Logger log = LoggerFactory.getLogger(App.class);
+
     public static void main( String[] args ) {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         Deployer deployer = (Deployer)context.getBean("deployer");
 
-        Component component = new Component();
-        component.setItemId(22);
-        component.setPublicationId(1);
+//        Component component = new Component();
+//        component.setItemId(22);
+//        component.setPublicationId(1);
+//
+//        Map<String, Object> fields = new HashMap<String, Object>();
+//        fields.put("name", "Hello Worlds");
+//        fields.put("publishedDate", new Date());
+//
+//        component.setFields(fields);
+//
+//        deployer.getComponentDao().save(component);
+//
+//        Query<Component> query = deployer.getComponentDao().getDs().createQuery(Component.class);
+//        query.field("itemId").equals(22);
+//        query.field("publicationId").equals(1);
+//
+//        Component retrieved = query.get();
+//
+//        System.out.println("retrieved component: " + retrieved.getFields().get("name"));
+//        System.out.println("retrieved component published Date: " + retrieved.getFields().get("publishedDate"));
+//        System.out.println("Config: " + deployer.getConfig().getString("database"));
 
-        Map<String, Object> fields = new HashMap<String, Object>();
-        fields.put("name", "Hello Worlds");
-        fields.put("publishedDate", new Date());
-
-        component.setFields(fields);
-
-        deployer.getComponentDao().save(component);
-
-        Query<Component> query = deployer.getComponentDao().getDs().createQuery(Component.class);
-        query.field("itemId").equals(22);
-        query.field("publicationId").equals(1);
-
-        Component retrieved = query.get();
-
-        System.out.println("retrieved component: " + retrieved.getFields().get("name"));
-        System.out.println("retrieved component published Date: " + retrieved.getFields().get("publishedDate"));
-        System.out.println("Config: " + deployer.getConfig().getString("database"));
-
-        System.out.println( "Hello World!" );
 
         try {
             WatchService watcher = FileSystems.getDefault().newWatchService();
@@ -58,14 +55,15 @@ public class App
 
             Path dir = FileSystems.getDefault().getPath("incoming");
             DirectoryStream<Path> files = Files.newDirectoryStream(dir);
+
             for (Path existingFile : files) {
-                System.out.println(existingFile.toString());
 
                 File file = existingFile.toFile();
 
                 Processor proc = deployer.getProcessor();
                 proc.process(file);
 
+                log.debug("Debugging " + file.getAbsolutePath());
             }
             dir.register(watcher, ENTRY_CREATE);
 

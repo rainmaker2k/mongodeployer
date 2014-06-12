@@ -96,7 +96,12 @@
         <dependency>
             <groupId>me.kahwah</groupId>
             <artifactId>mongodeployer</artifactId>
-            <version>LATEST</version>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.7</version>
         </dependency>
     </dependencies>
   </dependencyManagement>
