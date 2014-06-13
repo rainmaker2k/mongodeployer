@@ -33,7 +33,9 @@ public class MongoDbDeployer implements Deployer {
 
         String extractedDir = fileService.extractToWorkDir(zipPath);
 
+        if (extractedDir != null) {
 
+        }
     }
 
     public PageDAO getPageDao() {
