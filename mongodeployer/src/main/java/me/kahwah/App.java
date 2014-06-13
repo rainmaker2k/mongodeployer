@@ -60,7 +60,7 @@ public class App {
                 //File file = existingFile.toFile();
                 if (!existingFile.toFile().isDirectory() && existingFile.toString().endsWith(".zip")) {
 
-                    deployer.deploy(existingFile);
+                    deployer.deploy(existingFile.toString());
                 }
 
             }
