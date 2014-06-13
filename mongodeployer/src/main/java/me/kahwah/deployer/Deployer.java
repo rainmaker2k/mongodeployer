@@ -1,10 +1,18 @@
 package me.kahwah.deployer;
 
-import me.kahwah.dao.ComponentDAO;
-import me.kahwah.dao.ComponentPresentationDAO;
 import me.kahwah.dao.KeywordDAO;
 import me.kahwah.dao.PageDAO;
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 import org.apache.commons.configuration.XMLConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 
 /**
  * Created by rainmaker2k on 23/05/14.
@@ -12,19 +20,27 @@ import org.apache.commons.configuration.XMLConfiguration;
 
 public class Deployer {
 
-    private ComponentDAO componentDao;
+    private static Logger log = LoggerFactory.getLogger(Deployer.class);
+
     private PageDAO pageDao;
-    private ComponentPresentationDAO componentPresentationDao;
     private KeywordDAO keywordDao;
     private XMLConfiguration config;
-    private Processor processor;
+    private List<Processor> processors;
 
-    public ComponentDAO getComponentDao() {
-        return componentDao;
-    }
+    public void deploy(Path zippackage) {
 
-    public void setComponentDao(ComponentDAO componentDao) {
-        this.componentDao = componentDao;
+        Path workingDir = FileSystems.getDefault().getPath("work");
+
+        try {
+            //Path workingSubDir = Files.createDirectory(workingDir.resolve(zippackage.getFileName().toString()));
+
+            ZipFile zipFile = new ZipFile(zippackage.toString());
+
+            zipFile.extractAll(workingDir.toAbsolutePath().toString());
+
+        } catch (ZipException e) {
+            log.warn("Could not unzip " + zippackage.toString(), e);
+        }
     }
 
     public PageDAO getPageDao() {
@@ -43,14 +59,6 @@ public class Deployer {
         this.keywordDao = keywordDao;
     }
 
-    public ComponentPresentationDAO getComponentPresentationDao() {
-        return componentPresentationDao;
-    }
-
-    public void setComponentPresentationDao(ComponentPresentationDAO componentPresentationDao) {
-        this.componentPresentationDao = componentPresentationDao;
-    }
-
     public XMLConfiguration getConfig() {
         return config;
     }
@@ -59,11 +67,11 @@ public class Deployer {
         this.config = config;
     }
 
-    public Processor getProcessor() {
-        return processor;
+    public List<Processor> getProcessors() {
+        return processors;
     }
 
-    public void setProcessor(Processor processor) {
-        this.processor = processor;
+    public void setProcessors(List<Processor> processors) {
+        this.processors = processors;
     }
 }

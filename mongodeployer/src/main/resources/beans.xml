@@ -6,12 +6,26 @@
 
     <bean id="deployer"
           class="me.kahwah.deployer.Deployer">
-        <property name="componentDao" ref="componentDao" />
         <property name="pageDao" ref="pageDao" />
         <property name="keywordDao" ref="keywordDao" />
-        <property name="componentPresentationDao" ref="componentPresentationDao" />
         <property name="config" ref="xmlConfig" />
-        <property name="processor" ref="processor" />
+        <property name="processors" ref="processors" />
+
+    </bean>
+
+    <bean id="processors" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="componentProcessor" />
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="componentProcessor"
+            class="me.kahwah.deployer.impl.ComponentProcessorImpl">
+        <property name="componentPresentationDao" ref="componentPresentationDao" />
+        <property name="componentDao" ref="componentDao" />
+        <property name="serializer" ref="dd4tSerializer"></property>
     </bean>
 
     <bean id="componentDao" class="me.kahwah.dao.impl.ComponentDAOImpl">
@@ -38,17 +52,10 @@
         <constructor-arg ref="dbName" index="2"></constructor-arg>
     </bean>
 
-    <bean id="mongo" class="com.mongodb.Mongo">
-    </bean>
-    <bean id="morphia" class="org.mongodb.morphia.Morphia">
-    </bean>
+    <bean id="mongo" class="com.mongodb.Mongo"></bean>
+    <bean id="morphia" class="org.mongodb.morphia.Morphia"></bean>
 
-    <bean id="dd4tSerializer" class="me.kahwah.dd4t.core.serializers.impl.DefaultSerializer">
-    </bean>
-
-    <bean id="processor" class="me.kahwah.deployer.impl.ProcessorImpl">
-        <property name="serializer" ref="dd4tSerializer"></property>
-    </bean>
+    <bean id="dd4tSerializer" class="me.kahwah.dd4t.core.serializers.impl.DefaultSerializer"></bean>
 
     <bean id="dbName" class="java.lang.String">
         <constructor-arg value="#{xmlConfig.getString('database')}" />

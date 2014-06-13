@@ -66,5 +66,10 @@
           <artifactId>simple-xml</artifactId>
           <scope>runtime</scope>
       </dependency>
+      <dependency>
+          <groupId>net.lingala.zip4j</groupId>
+          <artifactId>zip4j</artifactId>
+      </dependency>
+
   </dependencies>
 </project>

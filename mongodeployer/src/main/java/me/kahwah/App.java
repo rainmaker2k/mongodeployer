@@ -57,13 +57,12 @@ public class App {
             DirectoryStream<Path> files = Files.newDirectoryStream(dir);
 
             for (Path existingFile : files) {
+                //File file = existingFile.toFile();
+                if (!existingFile.toFile().isDirectory() && existingFile.toString().endsWith(".zip")) {
 
-                File file = existingFile.toFile();
+                    deployer.deploy(existingFile);
+                }
 
-                Processor proc = deployer.getProcessor();
-                proc.process(file);
-
-                log.debug("Debugging " + file.getAbsolutePath());
             }
             dir.register(watcher, ENTRY_CREATE);
 

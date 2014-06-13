@@ -1,5 +1,7 @@
 package me.kahwah.deployer.impl;
 
+import me.kahwah.dao.ComponentDAO;
+import me.kahwah.dao.ComponentPresentationDAO;
 import me.kahwah.dd4t.contentmodel.Component;
 import me.kahwah.dd4t.core.serializers.Serializer;
 import me.kahwah.deployer.Processor;
@@ -11,11 +13,13 @@ import java.io.File;
 /**
  * Created by rainmaker2k on 10-06-14.
  */
-public class ProcessorImpl implements Processor {
+public class ComponentProcessorImpl implements Processor {
 
-    private static Logger log = LoggerFactory.getLogger(ProcessorImpl.class);
+    private static Logger log = LoggerFactory.getLogger(ComponentProcessorImpl.class);
 
     private Serializer serializer;
+    private ComponentDAO componentDao;
+    private ComponentPresentationDAO componentPresentationDao;
 
     @Override
     public void process(File file) {
@@ -35,5 +39,21 @@ public class ProcessorImpl implements Processor {
 
     public void setSerializer(Serializer serializer) {
         this.serializer = serializer;
+    }
+
+    public ComponentDAO getComponentDao() {
+        return componentDao;
+    }
+
+    public void setComponentDao(ComponentDAO componentDao) {
+        this.componentDao = componentDao;
+    }
+
+    public ComponentPresentationDAO getComponentPresentationDao() {
+        return componentPresentationDao;
+    }
+
+    public void setComponentPresentationDao(ComponentPresentationDAO componentPresentationDao) {
+        this.componentPresentationDao = componentPresentationDao;
     }
 }
