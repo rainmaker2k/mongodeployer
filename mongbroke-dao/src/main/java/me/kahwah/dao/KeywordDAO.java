@@ -1,7 +1,7 @@
 package me.kahwah.dao;
 
 import com.mongodb.Mongo;
-import me.kahwah.models.Keyword;
+import me.kahwah.dao.models.Keyword;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;

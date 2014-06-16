@@ -2,7 +2,7 @@ package me.kahwah.dao.impl;
 
 import com.mongodb.Mongo;
 import me.kahwah.dao.PageDAO;
-import me.kahwah.models.Page;
+import me.kahwah.dao.models.Page;
 import org.mongodb.morphia.Morphia;
 
 /**

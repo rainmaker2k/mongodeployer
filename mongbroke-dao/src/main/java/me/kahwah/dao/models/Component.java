@@ -1,4 +1,4 @@
-package me.kahwah.models;
+package me.kahwah.dao.models;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;

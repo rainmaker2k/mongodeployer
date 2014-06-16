@@ -1,4 +1,4 @@
-package me.kahwah.models;
+package me.kahwah.dao.models;
 
 /**
  * Created by rainmaker2k on 23/05/14.
