@@ -13,6 +13,7 @@
     <modules>
         <module>mongodeployer</module>
         <module>dd4t-core</module>
+        <module>mongbroke-dao</module>
     </modules>
   <build>
       <defaultGoal>package</defaultGoal>
@@ -107,6 +108,11 @@
             <groupId>net.lingala.zip4j</groupId>
             <artifactId>zip4j</artifactId>
             <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>me.kahwah</groupId>
+            <artifactId>mongbroke-dao</artifactId>
+            <version>${version}</version>
         </dependency>
     </dependencies>
   </dependencyManagement>

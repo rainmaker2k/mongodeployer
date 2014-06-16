@@ -23,11 +23,13 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="dd4t-core" />
+        <module name="mongbroke-dao" />
         <module name="mongodeployer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="dd4t-core" target="1.7" />
+      <module name="mongbroke-dao" target="1.7" />
       <module name="mongodeployer" target="1.7" />
     </bytecodeTargetLevel>
   </component>
