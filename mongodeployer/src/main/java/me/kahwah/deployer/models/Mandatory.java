@@ -13,6 +13,12 @@ public class Mandatory {
     @Element
     private VersionInfo versionInfo;
 
+    @Element
+    private Schema schema;
+
+    @Element
+    private OwningPublication owningPublication;
+
     public VersionInfo getVersionInfo() {
         return versionInfo;
     }
@@ -27,5 +33,21 @@ public class Mandatory {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public OwningPublication getOwningPublication() {
+        return owningPublication;
+    }
+
+    public void setOwningPublication(OwningPublication owningPublication) {
+        this.owningPublication = owningPublication;
+    }
+
+    public Schema getSchema() {
+        return schema;
+    }
+
+    public void setSchema(Schema schema) {
+        this.schema = schema;
     }
 }

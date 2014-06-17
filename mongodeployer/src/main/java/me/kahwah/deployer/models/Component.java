@@ -10,7 +10,7 @@ import org.simpleframework.xml.Root;
 @Root(name="component")
 public class Component {
 
-    @Attribute(name="id")
+    @Attribute(name="Id")
     private String id;
 
     @Attribute(name="isMultimedia")

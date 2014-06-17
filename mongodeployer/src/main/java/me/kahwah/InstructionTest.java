@@ -2,6 +2,7 @@ package me.kahwah;
 
 import me.kahwah.deployer.DateFormatTransformer;
 import me.kahwah.deployer.models.ComponentRoot;
+import me.kahwah.deployer.models.ProcessorInstructionsRoot;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.CamelCaseStyle;
@@ -30,10 +31,10 @@ public class InstructionTest {
         Style style = new CamelCaseStyle();
         Format format = new Format(style);
         Serializer serializer = new Persister(m, format);
-        File file = new File("incoming/components.xml");
+        File file = new File("incoming/instructions.xml");
         try {
-            ComponentRoot componentRoot = serializer.read(ComponentRoot.class, file);
-            System.out.println(componentRoot.getComponents().get(0).getId());
+            ProcessorInstructionsRoot processorInstructionsRoot = serializer.read(ProcessorInstructionsRoot.class, file);
+            System.out.println(processorInstructionsRoot.getSections().get(0).getPages().get(0).getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
