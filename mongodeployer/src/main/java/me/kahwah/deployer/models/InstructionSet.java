@@ -11,7 +11,7 @@ import java.util.List;
  * Created by rainmaker2k on 17-06-14.
  */
 @Root(name="ProcessorInstructions")
-public class ProcessorInstructionsRoot {
+public class InstructionSet {
 
     @Attribute
     private String version;
