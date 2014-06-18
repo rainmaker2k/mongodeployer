@@ -1,16 +1,8 @@
 package me.kahwah;
 
-import me.kahwah.deployer.Deployer;
-import me.kahwah.deployer.Processor;
+import me.kahwah.deployer.DeployerService;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.*;
-
-import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
-import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
 /**
  * Hello world!
@@ -23,8 +15,9 @@ public class App {
     public static void main( String[] args ) {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        Deployer deployer = (Deployer)context.getBean("deployer");
+        DeployerService deployer = (DeployerService)context.getBean("deployerService");
 
+        deployer.startService();
 //        Component component = new Component();
 //        component.setItemId(22);
 //        component.setPublicationId(1);
