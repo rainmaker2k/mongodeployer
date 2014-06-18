@@ -48,59 +48,6 @@ public class App {
 //        System.out.println("Config: " + deployer.getConfig().getString("database"));
 
 
-        try {
-            WatchService watcher = FileSystems.getDefault().newWatchService();
-
-            WatchKey key;
-
-            Path dir = FileSystems.getDefault().getPath("incoming");
-            DirectoryStream<Path> files = Files.newDirectoryStream(dir);
-
-            for (Path existingFile : files) {
-                //File file = existingFile.toFile();
-                if (!existingFile.toFile().isDirectory() && existingFile.toString().endsWith(".zip")) {
-
-                    deployer.deploy(existingFile.toString());
-                }
-
-            }
-            dir.register(watcher, ENTRY_CREATE);
-
-            for (;;) {
-
-                key = watcher.take();
-
-                for (WatchEvent<?> event : key.pollEvents()) {
-                    WatchEvent.Kind<?> kind = event.kind();
-
-                    if (kind == OVERFLOW) {
-                        continue;
-                    }
-
-                    WatchEvent<Path> ev = (WatchEvent<Path>)event;
-                    Path filename = ev.context();
-
-                    Path child = dir.resolve(filename);
-                    String mimetype = Files.probeContentType(child);
-                    if (!"text/plain".equals(mimetype)) {
-                        System.err.format("New file '%s'" +
-                                " is not a plain text file.%n", filename);
-                        continue;
-                    }
-
-                    System.out.println("File placed: " + filename);
-                }
-
-                boolean valid = key.reset();
-                if (!valid) {
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 }
