@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/dd4t-core/dd4t-core.iml" filepath="$PROJECT_DIR$/dd4t-core/dd4t-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mongbroke-dao/mongbroke-dao.iml" filepath="$PROJECT_DIR$/mongbroke-dao/mongbroke-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mongodeployer/mongodeployer.iml" filepath="$PROJECT_DIR$/mongodeployer/mongodeployer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mongodeployerparent.iml" filepath="$PROJECT_DIR$/mongodeployerparent.iml" />
+    </modules>
+  </component>
+</project>
+

@@ -1,0 +1,5 @@
+<configuration>
+    <database>dd4t</database>
+    <incominglocation></incominglocation>
+    <workDir>work</workDir>
+</configuration>
