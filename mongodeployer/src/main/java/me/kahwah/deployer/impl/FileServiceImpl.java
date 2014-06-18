@@ -8,6 +8,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,6 +43,17 @@ public class FileServiceImpl implements FileService {
 
         } catch (ZipException e) {
             log.warn("Could not unzip " + zipPath, e);
+        }
+
+        return null;
+    }
+
+    @Override
+    public InputStream getFile(String path) {
+        try {
+            return new FileInputStream(path);
+        } catch (FileNotFoundException e) {
+            log.debug(String.format("Could not find file at path %s", path));
         }
 
         return null;

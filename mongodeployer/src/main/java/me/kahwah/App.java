@@ -1,16 +1,8 @@
 package me.kahwah;
 
-import me.kahwah.deployer.Deployer;
-import me.kahwah.deployer.Processor;
+import me.kahwah.deployer.DeployerService;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.*;
-
-import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
-import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
 /**
  * Hello world!
@@ -23,8 +15,9 @@ public class App {
     public static void main( String[] args ) {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        Deployer deployer = (Deployer)context.getBean("deployer");
+        DeployerService deployer = (DeployerService)context.getBean("deployerService");
 
+        deployer.startService();
 //        Component component = new Component();
 //        component.setItemId(22);
 //        component.setPublicationId(1);
@@ -48,59 +41,6 @@ public class App {
 //        System.out.println("Config: " + deployer.getConfig().getString("database"));
 
 
-        try {
-            WatchService watcher = FileSystems.getDefault().newWatchService();
-
-            WatchKey key;
-
-            Path dir = FileSystems.getDefault().getPath("incoming");
-            DirectoryStream<Path> files = Files.newDirectoryStream(dir);
-
-            for (Path existingFile : files) {
-                //File file = existingFile.toFile();
-                if (!existingFile.toFile().isDirectory() && existingFile.toString().endsWith(".zip")) {
-
-                    deployer.deploy(existingFile.toString());
-                }
-
-            }
-            dir.register(watcher, ENTRY_CREATE);
-
-            for (;;) {
-
-                key = watcher.take();
-
-                for (WatchEvent<?> event : key.pollEvents()) {
-                    WatchEvent.Kind<?> kind = event.kind();
-
-                    if (kind == OVERFLOW) {
-                        continue;
-                    }
-
-                    WatchEvent<Path> ev = (WatchEvent<Path>)event;
-                    Path filename = ev.context();
-
-                    Path child = dir.resolve(filename);
-                    String mimetype = Files.probeContentType(child);
-                    if (!"text/plain".equals(mimetype)) {
-                        System.err.format("New file '%s'" +
-                                " is not a plain text file.%n", filename);
-                        continue;
-                    }
-
-                    System.out.println("File placed: " + filename);
-                }
-
-                boolean valid = key.reset();
-                if (!valid) {
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 }
