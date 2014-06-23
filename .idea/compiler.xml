@@ -22,6 +22,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="dd4t-core" />
+        <module name="mongbroke-dao" />
+        <module name="mongodeployer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

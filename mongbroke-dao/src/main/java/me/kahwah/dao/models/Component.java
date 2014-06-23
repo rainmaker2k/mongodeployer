@@ -10,7 +10,7 @@ import java.util.Map;
  * Created by rainmaker2k on 23/05/14.
  */
 @Entity("Component")
-public class Component extends RepositoryItem {
+public class Component extends BaseRepositoryItem {
 
     @Id
     private ObjectId id;

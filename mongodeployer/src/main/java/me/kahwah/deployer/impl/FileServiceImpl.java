@@ -20,7 +20,7 @@ import java.nio.file.Paths;
  */
 public class FileServiceImpl implements FileService {
 
-    private static Logger log = LoggerFactory.getLogger(MongoDbDeployer.class);
+    private static Logger log = LoggerFactory.getLogger(DeployerImpl.class);
 
     private XMLConfiguration config;
 

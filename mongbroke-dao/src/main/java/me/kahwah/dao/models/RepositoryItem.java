@@ -1,35 +1,19 @@
 package me.kahwah.dao.models;
 
 /**
- * Created by rainmaker2k on 23/05/14.
+ * Created by rainmaker2k on 19/06/14.
  */
-public abstract class RepositoryItem {
+public interface RepositoryItem {
 
-    private long publicationId;
-    private long itemId;
-    private String title;
+    long getPublicationId();
 
-    public long getPublicationId() {
-        return publicationId;
-    }
+    void setPublicationId(long publicationId);
 
-    public void setPublicationId(long publicationId) {
-        this.publicationId = publicationId;
-    }
+    long getItemId();
 
-    public long getItemId() {
-        return itemId;
-    }
+    void setItemId(long itemId);
 
-    public void setItemId(long itemId) {
-        this.itemId = itemId;
-    }
+    String getTitle();
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    void setTitle(String title);
 }

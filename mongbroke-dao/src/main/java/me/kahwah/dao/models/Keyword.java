@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by rainmaker2k on 29-5-2014.
  */
-public class Keyword extends RepositoryItem {
+public class Keyword extends BaseRepositoryItem {
     @Id
     private ObjectId id;
 

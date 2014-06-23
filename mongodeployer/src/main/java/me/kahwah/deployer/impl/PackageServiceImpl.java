@@ -4,6 +4,8 @@ import me.kahwah.deployer.DateFormatTransformer;
 import me.kahwah.deployer.FileService;
 import me.kahwah.deployer.PackageService;
 import me.kahwah.deployer.models.InstructionSet;
+import me.kahwah.deployer.models.MetaData;
+import me.kahwah.deployer.models.Section;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.stream.CamelCaseStyle;
@@ -20,6 +22,7 @@ import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by rainmaker2k on 18/06/14.
@@ -43,6 +46,21 @@ public class PackageServiceImpl implements PackageService {
             log.error("Could not deserialize instructions", e);
         }
 
+        return null;
+    }
+
+    @Override
+    public void processInstructions(InstructionSet instructionSet) {
+
+    }
+
+    @Override
+    public List getMetaData(MetaData metaData, String extractedDir) {
+        return null;
+    }
+
+    @Override
+    public List getSectionItems(Section section, String extractedDir) {
         return null;
     }
 

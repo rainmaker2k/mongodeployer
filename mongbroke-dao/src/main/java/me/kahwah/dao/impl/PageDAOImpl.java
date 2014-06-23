@@ -3,6 +3,7 @@ package me.kahwah.dao.impl;
 import com.mongodb.Mongo;
 import me.kahwah.dao.PageDAO;
 import me.kahwah.dao.models.Page;
+import me.kahwah.dao.models.RepositoryItem;
 import org.mongodb.morphia.Morphia;
 
 /**
@@ -18,4 +19,5 @@ public class PageDAOImpl extends PageDAO {
     public Page findByUrl(String url) {
         return getDs().createQuery(Page.class).field("url").equal(url).get();
     }
+
 }
