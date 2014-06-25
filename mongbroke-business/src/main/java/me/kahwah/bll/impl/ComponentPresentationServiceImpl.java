@@ -20,9 +20,6 @@ public class ComponentPresentationServiceImpl implements ComponentPresentationSe
     @Override
     public void save(ComponentPresentation componentPresentation) {
 
-        me.kahwah.dao.models.ComponentPresentation dbComponentPresentation =
-                new me.kahwah.dao.models.ComponentPresentation();
-
         Component component = new Component();
         Map<String, Object> componentFields = new HashMap<String, Object>();
         component.setFields(componentFields);
@@ -35,6 +32,8 @@ public class ComponentPresentationServiceImpl implements ComponentPresentationSe
 //            componentFields.put(fieldName, field.)
         }
 
+        me.kahwah.dao.models.ComponentPresentation dbComponentPresentation =
+                new me.kahwah.dao.models.ComponentPresentation();
         dbComponentPresentation.setComponent(component);
     }
 
