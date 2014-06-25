@@ -72,7 +72,7 @@
       </dependency>
       <dependency>
           <groupId>me.kahwah</groupId>
-          <artifactId>mongbroke-dao</artifactId>
+          <artifactId>mongbroke-business</artifactId>
       </dependency>
       <dependency>
           <groupId>org.simpleframework</groupId>
