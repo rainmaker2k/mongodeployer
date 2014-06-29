@@ -3,7 +3,7 @@ package me.kahwah.deployer.impl;
 import me.kahwah.bll.ComponentPresentationService;
 import me.kahwah.dao.ComponentDAO;
 import me.kahwah.dao.ComponentPresentationDAO;
-import me.kahwah.dd4t.contentmodel.ComponentPresentation;
+import me.kahwah.dao.models.ComponentPresentation;
 import me.kahwah.dd4t.core.serializers.Serializer;
 import me.kahwah.deployer.PackageService;
 import me.kahwah.deployer.Processor;

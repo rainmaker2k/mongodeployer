@@ -3,6 +3,8 @@ package me.kahwah.deployer.impl;
 import me.kahwah.deployer.DateFormatTransformer;
 import me.kahwah.deployer.FileService;
 import me.kahwah.deployer.PackageService;
+
+import me.kahwah.deployer.models.ComponentPresentation;
 import me.kahwah.deployer.models.InstructionSet;
 import me.kahwah.deployer.models.MetaData;
 import me.kahwah.deployer.models.Section;
@@ -22,6 +24,7 @@ import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -33,10 +36,12 @@ public class PackageServiceImpl implements PackageService {
 
     private FileService fileService;
 
+    private Serializer dd4tSerializer;
+
     @Override
     public InstructionSet createPackageInstructions(String packageLocation) {
 
-        Serializer serializer = getSerializer();
+        Serializer serializer = getTridionSerializer();
 
         Path instructionsFile = Paths.get(packageLocation, "instructions.xml");
         InputStream is = fileService.getFile(instructionsFile.toString());
@@ -61,10 +66,40 @@ public class PackageServiceImpl implements PackageService {
 
     @Override
     public List getSectionItems(Section section, String extractedDir) {
+
+
+        String sectionName = section.getName();
+
+        switch (section.getType()) {
+            case "ComponentPresentations": {
+                List<me.kahwah.dao.models.ComponentPresentation> resultList =
+                        new LinkedList<me.kahwah.dao.models.ComponentPresentation>();
+
+                List<ComponentPresentation> componentPresentations = section.getComponentPresentations();
+
+                for (ComponentPresentation cp : componentPresentations) {
+                    Path componentPresentationsPath = Paths.get(extractedDir, sectionName, cp.getName());
+                    InputStream is = fileService.getFile(componentPresentationsPath.toString());
+
+                    try {
+                        me.kahwah.dao.models.ComponentPresentation dd4tCp =
+                                dd4tSerializer.read(me.kahwah.dao.models.ComponentPresentation.class, is);
+                        resultList.add(dd4tCp);
+
+                    } catch (Exception e) {
+                        log.error("Could not deserialize", e);
+                    }
+                }
+
+                return resultList;
+            }
+
+        }
+
         return null;
     }
 
-    private Serializer getSerializer() {
+    private Serializer getTridionSerializer() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
         RegistryMatcher m = new RegistryMatcher();
@@ -81,5 +116,13 @@ public class PackageServiceImpl implements PackageService {
 
     public void setFileService(FileService fileService) {
         this.fileService = fileService;
+    }
+
+    public Serializer getDd4tSerializer() {
+        return dd4tSerializer;
+    }
+
+    public void setDd4tSerializer(Serializer dd4tSerializer) {
+        this.dd4tSerializer = dd4tSerializer;
     }
 }

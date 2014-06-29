@@ -55,7 +55,7 @@
       </dependency>
       <dependency>
           <groupId>me.kahwah</groupId>
-          <artifactId>dd4t-core</artifactId>
+          <artifactId>mongbroke-dao</artifactId>
       </dependency>
       <dependency>
           <groupId>org.slf4j</groupId>
