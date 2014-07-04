@@ -24,9 +24,6 @@ public class DeployerImpl implements Deployer {
 
     private static Logger log = LoggerFactory.getLogger(DeployerImpl.class);
 
-    private PageDAO pageDao;
-    private KeywordDAO keywordDao;
-    private XMLConfiguration config;
     private Map<String, Processor<Section>> sectionProcessors;
     private Map<String, Processor<MetaData>> metaDataProcessors;
     private FileService fileService;
@@ -66,30 +63,6 @@ public class DeployerImpl implements Deployer {
         }
 
 
-    }
-
-    public PageDAO getPageDao() {
-        return pageDao;
-    }
-
-    public void setPageDao(PageDAO pageDao) {
-        this.pageDao = pageDao;
-    }
-
-    public KeywordDAO getKeywordDao() {
-        return keywordDao;
-    }
-
-    public void setKeywordDao(KeywordDAO keywordDao) {
-        this.keywordDao = keywordDao;
-    }
-
-    public XMLConfiguration getConfig() {
-        return config;
-    }
-
-    public void setConfig(XMLConfiguration config) {
-        this.config = config;
     }
 
     public Map<String, Processor<Section>> getSectionProcessors() {

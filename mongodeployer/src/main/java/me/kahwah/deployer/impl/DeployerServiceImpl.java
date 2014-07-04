@@ -73,4 +73,8 @@ public class DeployerServiceImpl implements DeployerService {
         }
 
     }
+
+    public void setDeployer(Deployer deployer) {
+        this.deployer = deployer;
+    }
 }

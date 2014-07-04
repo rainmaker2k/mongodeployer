@@ -17,6 +17,7 @@ package me.kahwah.dd4t.core.serializers.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.io.Serializable;
 
 import me.kahwah.dd4t.contentmodel.Component;
@@ -106,6 +107,10 @@ public class DefaultSerializer implements
                 else if (object instanceof File) {
                     logger.debug("deserializing from file");
                     return serializer.read(c, (File)object);
+                }
+                else if (object instanceof InputStream) {
+                    logger.debug("deserialize from stream");
+                    return serializer.read(c, (InputStream)object);
                 }
 				else {
 					logger.debug("about to read string of length " + ((String)object).length());

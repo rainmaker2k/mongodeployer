@@ -1,5 +1,6 @@
 package me.kahwah.deployer.impl;
 
+import me.kahwah.dao.models.Component;
 import me.kahwah.deployer.DateFormatTransformer;
 import me.kahwah.deployer.FileService;
 import me.kahwah.deployer.PackageService;
@@ -36,7 +37,7 @@ public class PackageServiceImpl implements PackageService {
 
     private FileService fileService;
 
-    private Serializer dd4tSerializer;
+    private me.kahwah.dd4t.core.serializers.Serializer dd4tSerializer;
 
     @Override
     public InstructionSet createPackageInstructions(String packageLocation) {
@@ -72,8 +73,8 @@ public class PackageServiceImpl implements PackageService {
 
         switch (section.getType()) {
             case "ComponentPresentations": {
-                List<me.kahwah.dao.models.ComponentPresentation> resultList =
-                        new LinkedList<me.kahwah.dao.models.ComponentPresentation>();
+                List<Component> resultList =
+                        new LinkedList<Component>();
 
                 List<ComponentPresentation> componentPresentations = section.getComponentPresentations();
 
@@ -82,8 +83,8 @@ public class PackageServiceImpl implements PackageService {
                     InputStream is = fileService.getFile(componentPresentationsPath.toString());
 
                     try {
-                        me.kahwah.dao.models.ComponentPresentation dd4tCp =
-                                dd4tSerializer.read(me.kahwah.dao.models.ComponentPresentation.class, is);
+                        Component dd4tCp =
+                                (Component)dd4tSerializer.deserialize(is, Component.class);
                         resultList.add(dd4tCp);
 
                     } catch (Exception e) {
@@ -118,11 +119,11 @@ public class PackageServiceImpl implements PackageService {
         this.fileService = fileService;
     }
 
-    public Serializer getDd4tSerializer() {
+    public me.kahwah.dd4t.core.serializers.Serializer getDd4tSerializer() {
         return dd4tSerializer;
     }
 
-    public void setDd4tSerializer(Serializer dd4tSerializer) {
+    public void setDd4tSerializer(me.kahwah.dd4t.core.serializers.Serializer dd4tSerializer) {
         this.dd4tSerializer = dd4tSerializer;
     }
 }

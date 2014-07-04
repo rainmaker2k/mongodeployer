@@ -10,17 +10,15 @@
 
     <bean id="deployer"
           class="me.kahwah.deployer.impl.DeployerImpl">
-        <property name="pageDao" ref="pageDao" />
-        <property name="keywordDao" ref="keywordDao" />
-        <property name="config" ref="xmlConfig" />
         <!--<property name="processors" ref="processors" />-->
+        <property name="packageService" ref="packageService" />
         <property name="fileService" ref="fileService" />
         <property name="sectionProcessors">
             <map>
                 <entry key="ComponentPresentations">
                     <bean class="me.kahwah.deployer.impl.ComponentPresentationProcessorImpl">
-                        <property name="componentDao" ref="componentDao" />
-                        <property name="componentPresentationDao" ref="componentPresentationDao" />
+                        <property name="componentService" ref="componentService" />
+                        <property name="packageService" ref="packageService" />
                     </bean>
                 </entry>
             </map>
@@ -39,11 +37,16 @@
 
     <bean id="packageService" class="me.kahwah.deployer.impl.PackageServiceImpl">
         <property name="fileService" ref="fileService" />
+        <property name="dd4tSerializer" ref="dd4tSerializer" />
     </bean>
 
     <bean id="fileService"
           class="me.kahwah.deployer.impl.FileServiceImpl">
         <property name="config" ref="xmlConfig" />
+    </bean>
+
+    <bean id="componentService" class="me.kahwah.bll.impl.ComponentServiceImpl">
+        <property name="componentDAO" ref="componentDao" />
     </bean>
 
     <!-- DAOs -->
@@ -72,7 +75,7 @@
     </bean>
     <!-- End DAOs -->
 
-    <bean id="mongo" class="com.mongodb.Mongo"></bean>
+    <bean id="mongo" class="com.mongodb.MongoClient"></bean>
     <bean id="morphia" class="org.mongodb.morphia.Morphia"></bean>
 
     <bean id="dd4tSerializer" class="me.kahwah.dd4t.core.serializers.impl.DefaultSerializer"></bean>

@@ -36,8 +36,9 @@ public class FileServiceImpl implements FileService {
 
             zipFile.extractAll(workingDir.toAbsolutePath().toString());
 
-            String fileWithoutExt = FilenameUtils.removeExtension(zipPath);
-            Path path = Paths.get(workingDir.toAbsolutePath().toString(), fileWithoutExt);
+            String baseName = FilenameUtils.getBaseName(zipPath);
+            String fileWithoutExt = FilenameUtils.removeExtension(baseName);
+            Path path = Paths.get(workingDir.toAbsolutePath().toString(), fileWithoutExt + ".Content");
 
             return path.toString();
 

@@ -1,10 +1,7 @@
 package me.kahwah.deployer.impl;
 
-import me.kahwah.bll.ComponentPresentationService;
-import me.kahwah.dao.ComponentDAO;
-import me.kahwah.dao.ComponentPresentationDAO;
-import me.kahwah.dao.models.ComponentPresentation;
-import me.kahwah.dd4t.core.serializers.Serializer;
+import me.kahwah.bll.ComponentService;
+import me.kahwah.dao.models.Component;
 import me.kahwah.deployer.PackageService;
 import me.kahwah.deployer.Processor;
 import me.kahwah.deployer.models.Section;
@@ -23,16 +20,16 @@ public class ComponentPresentationProcessorImpl implements Processor<Section> {
     private static Logger log = LoggerFactory.getLogger(ComponentPresentationProcessorImpl.class);
 
     private PackageService packageService;
-    private ComponentPresentationService componentPresentationService;
+    private ComponentService componentService;
 
     @Override
     public void process(Section section, String extractedDir) {
 
         Path componentPresentationsFilePath = Paths.get(extractedDir, section.getName());
-        List<ComponentPresentation> componentPresentations = packageService.getSectionItems(section, section.getName());
+        List<Component> components = packageService.getSectionItems(section, extractedDir);
 
-        for (ComponentPresentation componentPresentation : componentPresentations) {
-            componentPresentationService.save(componentPresentation);
+        for (Component component : components) {
+            componentService.save(component);
         }
         //packageService.get
 //        Component component;
@@ -53,12 +50,12 @@ public class ComponentPresentationProcessorImpl implements Processor<Section> {
         this.packageService = packageService;
     }
 
-    public ComponentPresentationService getComponentPresentationService() {
-        return componentPresentationService;
+    public ComponentService getComponentService() {
+        return componentService;
     }
 
-    public void setComponentPresentationService(ComponentPresentationService componentPresentationService) {
-        this.componentPresentationService = componentPresentationService;
+    public void setComponentService(ComponentService componentService) {
+        this.componentService = componentService;
     }
 
 }
