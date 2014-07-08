@@ -4,6 +4,7 @@ import me.kahwah.deployer.FileService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import org.apache.commons.configuration.XMLConfiguration;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,11 @@ public class FileServiceImpl implements FileService {
             ZipFile zipFile = new ZipFile(zipPath);
 
             zipFile.extractAll(workingDir.toAbsolutePath().toString());
-
+            
+            Path zipfilepath = Paths.get(zipPath);
+            
+            zipfilepath.toFile().delete();
+            
             String baseName = FilenameUtils.getBaseName(zipPath);
             String fileWithoutExt = FilenameUtils.removeExtension(baseName);
             Path path = Paths.get(workingDir.toAbsolutePath().toString(), fileWithoutExt + ".Content");
