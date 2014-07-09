@@ -9,9 +9,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -63,6 +61,15 @@ public class FileServiceImpl implements FileService {
         }
 
         return null;
+    }
+
+    @Override
+    public void cleanupExtractedDir(String extractedDir) {
+        try {
+            FileUtils.deleteDirectory(new File(extractedDir));
+        } catch (IOException e) {
+            log.error("Could not delete extractedDir", e);
+        }
     }
 
     public XMLConfiguration getConfig() {

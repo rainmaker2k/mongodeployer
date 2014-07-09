@@ -31,13 +31,20 @@ public class DeployerImpl implements Deployer {
 
     public void deploy(String zipPath) {
 
-        String extractedDir = fileService.extractToWorkDir(zipPath);
+        try {
+            String extractedDir = fileService.extractToWorkDir(zipPath);
 
-        if (extractedDir != null) {
-            InstructionSet instructionSet = packageService.createPackageInstructions(extractedDir);
+            if (extractedDir != null) {
+                InstructionSet instructionSet = packageService.createPackageInstructions(extractedDir);
 
-            processInstructions(instructionSet, extractedDir);
+                processInstructions(instructionSet, extractedDir);
+
+                fileService.cleanupExtractedDir(extractedDir);
+            }
+        } catch (Exception ex) {
+             log.error("Could not deploy", ex);
         }
+
     }
 
     private void processInstructions(InstructionSet instructionSet, String extractedDir) {
