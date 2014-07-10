@@ -25,21 +25,11 @@ public class ComponentPresentationProcessorImpl implements Processor<Section> {
     @Override
     public void process(Section section, String extractedDir) {
 
-        Path componentPresentationsFilePath = Paths.get(extractedDir, section.getName());
         List<Component> components = packageService.getSectionItems(section, extractedDir);
 
         for (Component component : components) {
             componentService.save(component);
         }
-        //packageService.get
-//        Component component;
-//        try {
-//            component = (Component)serializer.deserialize(file, Component.class);
-//
-//            log.info("Component id " + component.getId());
-//        } catch (Exception e) {
-//            log.warn("Not component XML");
-//        }
     }
 
     public PackageService getPackageService() {

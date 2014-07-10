@@ -1,6 +1,7 @@
 package me.kahwah.deployer.impl;
 
 import me.kahwah.dao.models.Component;
+import me.kahwah.dao.models.Page;
 import me.kahwah.deployer.DateFormatTransformer;
 import me.kahwah.deployer.FileService;
 import me.kahwah.deployer.PackageService;
@@ -74,7 +75,7 @@ public class PackageServiceImpl implements PackageService {
         switch (section.getType()) {
             case "ComponentPresentations": {
                 List<Component> resultList =
-                        new LinkedList<Component>();
+                        new LinkedList<>();
 
                 List<ComponentPresentation> componentPresentations = section.getComponentPresentations();
 
@@ -93,6 +94,15 @@ public class PackageServiceImpl implements PackageService {
                 }
 
                 return resultList;
+            }
+            case "Pages": {
+                List<Page> pagesResultList = new LinkedList<>();
+
+                List<me.kahwah.deployer.models.Page> pages = section.getPages();
+
+                for (me.kahwah.deployer.models.Page page : pages) {
+                    
+                }
             }
 
         }

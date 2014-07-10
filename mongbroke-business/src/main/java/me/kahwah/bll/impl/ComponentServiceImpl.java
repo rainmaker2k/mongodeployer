@@ -16,9 +16,7 @@ public class ComponentServiceImpl implements ComponentService {
     @Override
     public void save(Component component) {
 
-        Component dbComponent =
-                (Component)component;
-        componentDAO.save(dbComponent);
+        componentDAO.save(component);
 
     }
 

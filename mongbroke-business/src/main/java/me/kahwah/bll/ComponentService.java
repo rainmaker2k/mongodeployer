@@ -7,5 +7,5 @@ import me.kahwah.dao.models.Component;
  */
 public interface ComponentService {
 
-    void save(Component componentPresentation);
+    void save(Component component);
 }
