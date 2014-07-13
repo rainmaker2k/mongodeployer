@@ -27,6 +27,9 @@ public class Section {
     @ElementList(required = false, inline = true)
     private List<Schema> schemas;
 
+    @ElementList(required = false, inline = true)
+    private List<Section> sections;
+
     public String getType() {
         return type;
     }
@@ -65,5 +68,13 @@ public class Section {
 
     public void setSchemas(List<Schema> schemas) {
         this.schemas = schemas;
+    }
+
+    public List<Section> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 }

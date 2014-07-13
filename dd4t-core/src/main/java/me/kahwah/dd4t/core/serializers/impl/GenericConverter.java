@@ -15,25 +15,8 @@
  */
 package me.kahwah.dd4t.core.serializers.impl;
 
+import me.kahwah.dd4t.contentmodel.impl.*;
 import me.kahwah.dd4t.core.serializers.Serializer;
-import me.kahwah.dd4t.contentmodel.impl.CategoryImpl;
-import me.kahwah.dd4t.contentmodel.impl.ComponentLinkField;
-import me.kahwah.dd4t.contentmodel.impl.ComponentPresentationImpl;
-import me.kahwah.dd4t.contentmodel.impl.ComponentTemplateImpl;
-import me.kahwah.dd4t.contentmodel.impl.DateField;
-import me.kahwah.dd4t.contentmodel.impl.EmbeddedField;
-import me.kahwah.dd4t.contentmodel.impl.GenericComponentImpl;
-import me.kahwah.dd4t.contentmodel.impl.GenericPageImpl;
-import me.kahwah.dd4t.contentmodel.impl.KeywordImpl;
-import me.kahwah.dd4t.contentmodel.impl.MultimediaImpl;
-import me.kahwah.dd4t.contentmodel.impl.NumericField;
-import me.kahwah.dd4t.contentmodel.impl.OrganizationalItemImpl;
-import me.kahwah.dd4t.contentmodel.impl.PageTemplateImpl;
-import me.kahwah.dd4t.contentmodel.impl.PublicationImpl;
-import me.kahwah.dd4t.contentmodel.impl.SchemaImpl;
-import me.kahwah.dd4t.contentmodel.impl.StructureGroupImpl;
-import me.kahwah.dd4t.contentmodel.impl.TextField;
-import me.kahwah.dd4t.contentmodel.impl.XhtmlField;
 import org.simpleframework.xml.convert.Converter;
 import org.simpleframework.xml.stream.InputNode;
 import org.simpleframework.xml.stream.OutputNode;
@@ -91,6 +74,9 @@ public class GenericConverter implements Converter<Object> {
 		else if("componentTemplate".equals(name)){
 			object = (ComponentTemplateImpl) serializer.deserialize(node, ComponentTemplateImpl.class);			
 		}
+        else if("condition".equals(name)){
+            object = (ConditionImpl) serializer.deserialize(node, ConditionImpl.class);
+        }
 		else if("category".equals(name)){
 			object = (CategoryImpl) serializer.deserialize(node, CategoryImpl.class);			
 		}

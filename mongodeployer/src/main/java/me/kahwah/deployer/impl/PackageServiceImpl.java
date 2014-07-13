@@ -98,16 +98,44 @@ public class PackageServiceImpl implements PackageService {
             case "Pages": {
                 List<Page> pagesResultList = new LinkedList<>();
 
-                List<me.kahwah.deployer.models.Page> pages = section.getPages();
+                Path pagesPath = Paths.get(extractedDir, sectionName);
 
-                for (me.kahwah.deployer.models.Page page : pages) {
-                    
-                }
+                addPagesInSection(section, pagesPath.toString(), pagesResultList);
+
+                return pagesResultList;
             }
 
         }
 
         return null;
+    }
+
+    private void addPagesInSection(Section section, String previousPath, List<Page> pages) {
+
+        if (section.getSections() != null) {
+            for (Section innerSection : section.getSections()) {
+                List<me.kahwah.deployer.models.Page> deployerPages = innerSection.getPages();
+
+                Path sectionPath = Paths.get(previousPath, innerSection.getName());
+
+                for (me.kahwah.deployer.models.Page deployerPage : deployerPages) {
+                    Path pagePath = Paths.get(sectionPath.toString(), deployerPage.getName());
+
+                    InputStream is = fileService.getFile(pagePath.toString());
+
+                    try {
+                        Page dd4tPage =
+                                (Page) dd4tSerializer.deserialize(is, Page.class);
+                        pages.add(dd4tPage);
+
+                    } catch (Exception e) {
+                        log.error("Could not deserialize", e);
+                    }
+                }
+
+                addPagesInSection(innerSection, sectionPath.toString(), pages);
+            }
+        }
     }
 
     private Serializer getTridionSerializer() {
