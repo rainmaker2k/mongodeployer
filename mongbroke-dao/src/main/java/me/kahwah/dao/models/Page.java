@@ -18,4 +18,13 @@ public class Page extends GenericPageImpl {
     @Id
     private ObjectId id;
 
+    private String path;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 }
