@@ -28,6 +28,9 @@ public class Section {
     private List<Schema> schemas;
 
     @ElementList(required = false, inline = true)
+    private List<Binary> binaries;
+
+    @ElementList(required = false, inline = true)
     private List<Section> sections;
 
     public String getType() {
@@ -76,5 +79,13 @@ public class Section {
 
     public void setSections(List<Section> sections) {
         this.sections = sections;
+    }
+
+    public List<Binary> getBinaries() {
+        return binaries;
+    }
+
+    public void setBinaries(List<Binary> binaries) {
+        this.binaries = binaries;
     }
 }
