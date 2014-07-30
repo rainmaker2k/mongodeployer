@@ -59,6 +59,11 @@
         <property name="pageDao" ref="pageDao" />
     </bean>
 
+    <bean id="binaryService" class="me.kahwah.bll.impl.BinaryServiceImpl">
+        <property name="db" value="#{mongo.getDB(@dbName)}" />
+        <property name="binaryDao" ref="binaryDao" />
+    </bean>
+
     <!-- DAOs -->
     <bean id="componentDao" class="me.kahwah.dao.impl.ComponentDAOImpl">
         <constructor-arg ref="mongo" index="0"></constructor-arg>
@@ -83,6 +88,12 @@
         <constructor-arg ref="morphia" index="1"></constructor-arg>
         <constructor-arg ref="dbName" index="2"></constructor-arg>
     </bean>
+
+    <bean id="binaryDao" class="me.kahwah.dao.impl.BinaryDAOImpl">
+        <constructor-arg ref="mongo" index="0"></constructor-arg>
+        <constructor-arg ref="morphia" index="1"></constructor-arg>
+        <constructor-arg ref="dbName" index="2"></constructor-arg>
+    </bean>
     <!-- End DAOs -->
 
     <bean id="mongo" class="com.mongodb.MongoClient"></bean>
@@ -93,6 +104,7 @@
     <bean id="dbName" class="java.lang.String">
         <constructor-arg value="#{xmlConfig.getString('database')}" />
     </bean>
+
 
     <bean id="xmlConfig" class="org.apache.commons.configuration.XMLConfiguration">
         <constructor-arg type="java.lang.String">

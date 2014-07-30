@@ -13,12 +13,15 @@ import me.kahwah.dao.models.Binary;
  * Created by rainmaker2k on 18/07/14.
  */
 public class BinaryServiceImpl implements BinaryService {
-    private BinaryDAO binaryDAO;
+    private BinaryDAO binaryDao;
     private DB db;
+
+    public BinaryServiceImpl() {
+    }
 
     @Override
     public void save(Binary binary) {
-        binaryDAO.save(binary);
+        binaryDao.save(binary);
 
         GridFS gridFS = new GridFS(db);
 
@@ -27,12 +30,15 @@ public class BinaryServiceImpl implements BinaryService {
         file.save();
     }
 
-    public BinaryDAO getBinaryDAO() {
-        return binaryDAO;
+    public BinaryDAO getBinaryDao() {
+        return binaryDao;
     }
 
-    public void setBinaryDAO(BinaryDAO binaryDAO) {
-        this.binaryDAO = binaryDAO;
+    public void setBinaryDao(BinaryDAO binaryDAO) {
+        this.binaryDao = binaryDAO;
     }
 
+    public void setDb(DB db) {
+        this.db = db;
+    }
 }
