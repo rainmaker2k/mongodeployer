@@ -1,5 +1,6 @@
 package me.kahwah.deployer.impl;
 
+import me.kahwah.dao.models.Binary;
 import me.kahwah.dao.models.Component;
 import me.kahwah.dao.models.Page;
 import me.kahwah.deployer.DateFormatTransformer;
@@ -106,10 +107,58 @@ public class PackageServiceImpl implements PackageService {
 
                 return pagesResultList;
             }
+            case "Binaries": {
+                List<Binary> binariesResultList = new LinkedList<>();
+
+                Path basePath = Paths.get(extractedDir, sectionName);
+
+                Path publishedPath = Paths.get("");
+
+                addBinariesInSection(section, basePath, publishedPath, binariesResultList);
+
+                return binariesResultList;
+            }
 
         }
 
         return null;
+    }
+
+    private void addBinariesInSection(Section section, Path basePath, Path publishedPath, List<Binary> binaries) {
+        if (section.getSections() != null) {
+            for (Section innerSection : section.getSections()) {
+                List<me.kahwah.deployer.models.Binary> deployerBinaries = innerSection.getBinaries();
+
+                Path subPublishedPath = publishedPath.resolve(innerSection.getName());
+
+                Path sectionPath = basePath.resolve(subPublishedPath);
+
+                for (me.kahwah.deployer.models.Binary deployerBinary : deployerBinaries) {
+
+                    Path binaryPath = sectionPath.resolve(deployerBinary.getName());
+
+                    InputStream is = fileService.getFile(binaryPath.toString());
+
+                    try {
+                        Binary binary = new Binary();
+                        binary.setInputStream(is);
+
+                        Path publishedPagePath = subPublishedPath.resolve(deployerBinary.getName());
+
+                        StringBuilder sb = new StringBuilder("/");
+                        sb.append(publishedPagePath.toString());
+
+                        binary.setUrl(sb.toString());
+                        binaries.add(binary);
+
+                    } catch (Exception e) {
+                        log.error("Could not deserialize", e);
+                    }
+                }
+
+                addBinariesInSection(innerSection, basePath, subPublishedPath, binaries);
+            }
+        }
     }
 
     private void addPagesInSection(Section section, Path basePath, Path publishedPath, List<Page> pages) {

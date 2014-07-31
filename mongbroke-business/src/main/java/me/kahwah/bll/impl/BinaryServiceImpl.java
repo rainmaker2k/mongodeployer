@@ -23,7 +23,7 @@ public class BinaryServiceImpl implements BinaryService {
     public void save(Binary binary) {
         binaryDao.save(binary);
 
-        GridFS gridFS = new GridFS(db);
+        GridFS gridFS = new GridFS(db, "binaries");
 
         GridFSInputFile file = gridFS.createFile(binary.getInputStream());
         file.setFilename(binary.getFileName());

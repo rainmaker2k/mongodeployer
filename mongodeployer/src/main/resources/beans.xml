@@ -27,6 +27,12 @@
                         <property name="packageService" ref="packageService" />
                     </bean>
                 </entry>
+                <entry key="Binaries">
+                    <bean class="me.kahwah.deployer.impl.BinaryProcessorImpl">
+                        <property name="binaryService" ref="binaryService" />
+                        <property name="packageService" ref="packageService" />
+                    </bean>
+                </entry>
             </map>
         </property>
         <property name="metaDataProcessors">
