@@ -25,7 +25,6 @@ public class BinaryProcessorImpl implements Processor<Section> {
     @Override
     public void process(Section section, String extractedDir) {
 
-
         List<Binary> binaries = packageService.getSectionItems(section, extractedDir);
 
         for (Binary binary : binaries) {

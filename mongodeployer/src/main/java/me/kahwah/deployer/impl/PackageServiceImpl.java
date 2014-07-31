@@ -143,10 +143,10 @@ public class PackageServiceImpl implements PackageService {
                         Binary binary = new Binary();
                         binary.setInputStream(is);
 
-                        Path publishedPagePath = subPublishedPath.resolve(deployerBinary.getName());
+                        Path publishedBinaryPath = subPublishedPath.resolve(deployerBinary.getName());
 
                         StringBuilder sb = new StringBuilder("/");
-                        sb.append(publishedPagePath.toString());
+                        sb.append(publishedBinaryPath.toString());
 
                         binary.setUrl(sb.toString());
                         binaries.add(binary);
