@@ -19,8 +19,18 @@ public class ComponentServiceImpl implements ComponentService {
     public void save(Component component) {
         TridionUri componentUri = new TridionUri(component.getId());
 
-        Query<ComponentPresentation> query = componentDAO.getDs().createQuery(ComponentPresentation.class);
-            query.field("id").equals(component.getId());
+        Query<Component> query = componentDAO.getDs().createQuery(Component.class);
+        query.criteria("id").equals(component.getId());
+
+        Component existingComponent = componentDAO.findOne(query);
+
+        if (existingComponent != null) {
+            component.setId(existingComponent.getId());
+            component.setId(existingComponent.getObjectId());
+        }
+
+        componentDAO.save(component);
+
 //            query.field("publicationId").equals(1);
 //            dbComponentPresentation = componentPresentationDAO.findOne()
 //            new me.kahwah.dao.models.ComponentPresentation();
@@ -28,7 +38,7 @@ public class ComponentServiceImpl implements ComponentService {
 //            dbComponentPresentation
 
 
-        componentDAO.save(component);
+
     }
 
 

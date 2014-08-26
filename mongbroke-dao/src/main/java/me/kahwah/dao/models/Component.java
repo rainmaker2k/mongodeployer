@@ -16,4 +16,12 @@ public class Component extends GenericComponentImpl {
     @Id
     private ObjectId id;
 
+    public ObjectId getObjectId() {
+        return this.id;
+    }
+
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 }
