@@ -1,7 +1,9 @@
 package me.kahwah.dao.impl;
 
 import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import me.kahwah.dao.ComponentDAO;
+import me.kahwah.dao.models.RepositoryItem;
 import org.mongodb.morphia.Morphia;
 
 /**
@@ -9,9 +11,8 @@ import org.mongodb.morphia.Morphia;
  */
 public class ComponentDAOImpl extends ComponentDAO {
 
-
-    public ComponentDAOImpl(Mongo mongo, Morphia morphia, String dbName) {
-        super(mongo, morphia, dbName);
+    public ComponentDAOImpl(MongoClient client, Morphia morphia, String dbName) {
+        super(client, morphia, dbName);
     }
 
 }

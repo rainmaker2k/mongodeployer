@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Created by rainmaker2k on 03-06-14.
  */
-public class PageTemplate extends RepositoryItem {
+public class PageTemplate extends BaseRepositoryItem {
 
     @Id
     private ObjectId id;

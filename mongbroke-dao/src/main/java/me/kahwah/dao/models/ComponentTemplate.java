@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by rainmaker2k on 27-5-2014.
  */
 
-public class ComponentTemplate extends RepositoryItem {
+public class ComponentTemplate extends BaseRepositoryItem {
 
     @Id
     private ObjectId id;

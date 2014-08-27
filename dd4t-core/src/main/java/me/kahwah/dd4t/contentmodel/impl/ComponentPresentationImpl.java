@@ -17,8 +17,12 @@ package me.kahwah.dd4t.contentmodel.impl;
 
 import me.kahwah.dd4t.contentmodel.ComponentPresentation;
 import me.kahwah.dd4t.contentmodel.ComponentTemplate;
+import me.kahwah.dd4t.contentmodel.Condition;
 import me.kahwah.dd4t.contentmodel.GenericComponent;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+
+import java.util.List;
 
 
 /**
@@ -37,6 +41,9 @@ public class ComponentPresentationImpl implements ComponentPresentation {
 
 	@Element(name = "renderedContent", required = false)
 	private String renderedContent;
+
+    @ElementList(name = "conditions", required = false)
+    private List<Condition> conditions;
 	
 	/**
 	 * Get the component
@@ -86,4 +93,12 @@ public class ComponentPresentationImpl implements ComponentPresentation {
 	public boolean isDynamic() {
 		return this.isDynamic;
 	}
+
+    public List<Condition> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<Condition> conditions) {
+        this.conditions = conditions;
+    }
 }

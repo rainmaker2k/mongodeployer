@@ -4,13 +4,12 @@ import me.kahwah.deployer.FileService;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import org.apache.commons.configuration.XMLConfiguration;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,7 +19,7 @@ import java.nio.file.Paths;
  */
 public class FileServiceImpl implements FileService {
 
-    private static Logger log = LoggerFactory.getLogger(MongoDbDeployer.class);
+    private static Logger log = LoggerFactory.getLogger(DeployerImpl.class);
 
     private XMLConfiguration config;
 
@@ -35,9 +34,14 @@ public class FileServiceImpl implements FileService {
             ZipFile zipFile = new ZipFile(zipPath);
 
             zipFile.extractAll(workingDir.toAbsolutePath().toString());
-
-            String fileWithoutExt = FilenameUtils.removeExtension(zipPath);
-            Path path = Paths.get(workingDir.toAbsolutePath().toString(), fileWithoutExt);
+            
+            Path zipfilepath = Paths.get(zipPath);
+            
+            zipfilepath.toFile().delete();
+            
+            String baseName = FilenameUtils.getBaseName(zipPath);
+            String fileWithoutExt = FilenameUtils.removeExtension(baseName);
+            Path path = Paths.get(workingDir.toAbsolutePath().toString(), fileWithoutExt + ".Content");
 
             return path.toString();
 
@@ -57,6 +61,15 @@ public class FileServiceImpl implements FileService {
         }
 
         return null;
+    }
+
+    @Override
+    public void cleanupExtractedDir(String extractedDir) {
+        try {
+            FileUtils.deleteDirectory(new File(extractedDir));
+        } catch (IOException e) {
+            log.error("Could not delete extractedDir", e);
+        }
     }
 
     public XMLConfiguration getConfig() {

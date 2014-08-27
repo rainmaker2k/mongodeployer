@@ -51,11 +51,8 @@ public class DeployerServiceImpl implements DeployerService {
                     Path filename = ev.context();
 
                     Path child = dir.resolve(filename);
-                    String mimetype = Files.probeContentType(child);
-                    if (!"text/plain".equals(mimetype)) {
-                        System.err.format("New file '%s'" +
-                                " is not a plain text file.%n", filename);
-                        continue;
+                    if (!child.toFile().isDirectory() && child.toString().endsWith(".zip")) {
+                        deployer.deploy(child.toString());
                     }
 
                     System.out.println("File placed: " + filename);
@@ -72,5 +69,9 @@ public class DeployerServiceImpl implements DeployerService {
             e.printStackTrace();
         }
 
+    }
+
+    public void setDeployer(Deployer deployer) {
+        this.deployer = deployer;
     }
 }

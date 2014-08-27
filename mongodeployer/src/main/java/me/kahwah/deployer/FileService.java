@@ -10,4 +10,6 @@ public interface FileService {
     String extractToWorkDir(String zipPath);
 
     InputStream getFile(String path);
+
+    void cleanupExtractedDir(String extractedDir);
 }

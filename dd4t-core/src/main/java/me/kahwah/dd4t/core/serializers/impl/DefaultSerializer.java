@@ -17,22 +17,10 @@ package me.kahwah.dd4t.core.serializers.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.io.Serializable;
 
-import me.kahwah.dd4t.contentmodel.Component;
-import me.kahwah.dd4t.contentmodel.ComponentPresentation;
-import me.kahwah.dd4t.contentmodel.ComponentTemplate;
-import me.kahwah.dd4t.contentmodel.Field;
-import me.kahwah.dd4t.contentmodel.FieldSet;
-import me.kahwah.dd4t.contentmodel.GenericComponent;
-import me.kahwah.dd4t.contentmodel.GenericPage;
-import me.kahwah.dd4t.contentmodel.Multimedia;
-import me.kahwah.dd4t.contentmodel.OrganizationalItem;
-import me.kahwah.dd4t.contentmodel.Page;
-import me.kahwah.dd4t.contentmodel.PageTemplate;
-import me.kahwah.dd4t.contentmodel.Publication;
-import me.kahwah.dd4t.contentmodel.Schema;
-import me.kahwah.dd4t.contentmodel.StructureGroup;
+import me.kahwah.dd4t.contentmodel.*;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.Registry;
 import org.simpleframework.xml.convert.RegistryStrategy;
@@ -75,6 +63,7 @@ public class DefaultSerializer implements
 			registry.bind(GenericComponent.class, converter);
 			registry.bind(Publication.class, converter);
 			registry.bind(ComponentPresentation.class, converter);
+            registry.bind(Condition.class, converter);
 			registry.bind(ComponentTemplate.class, converter);
 			registry.bind(PageTemplate.class, converter);
 			registry.bind(OrganizationalItem.class, converter);
@@ -106,6 +95,10 @@ public class DefaultSerializer implements
                 else if (object instanceof File) {
                     logger.debug("deserializing from file");
                     return serializer.read(c, (File)object);
+                }
+                else if (object instanceof InputStream) {
+                    logger.debug("deserialize from stream");
+                    return serializer.read(c, (InputStream)object);
                 }
 				else {
 					logger.debug("about to read string of length " + ((String)object).length());

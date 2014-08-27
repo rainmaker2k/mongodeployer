@@ -14,6 +14,7 @@
         <module>mongodeployer</module>
         <module>dd4t-core</module>
         <module>mongbroke-dao</module>
+        <module>mongbroke-business</module>
     </modules>
   <build>
       <defaultGoal>package</defaultGoal>
@@ -112,6 +113,11 @@
         <dependency>
             <groupId>me.kahwah</groupId>
             <artifactId>mongbroke-dao</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.kahwah</groupId>
+            <artifactId>mongbroke-business</artifactId>
             <version>${version}</version>
         </dependency>
     </dependencies>

@@ -9,40 +9,68 @@
     </bean>
 
     <bean id="deployer"
-          class="me.kahwah.deployer.impl.MongoDbDeployer">
-        <property name="pageDao" ref="pageDao" />
-        <property name="keywordDao" ref="keywordDao" />
-        <property name="config" ref="xmlConfig" />
-        <property name="processors" ref="processors" />
+          class="me.kahwah.deployer.impl.DeployerImpl">
+        <!--<property name="processors" ref="processors" />-->
+        <property name="packageService" ref="packageService" />
         <property name="fileService" ref="fileService" />
-    </bean>
-
-    <bean id="processors" class="java.util.ArrayList">
-        <constructor-arg>
-            <list>
-                <ref bean="componentProcessor" />
-            </list>
-        </constructor-arg>
+        <property name="sectionProcessors">
+            <map>
+                <entry key="ComponentPresentations">
+                    <bean class="me.kahwah.deployer.impl.ComponentPresentationProcessorImpl">
+                        <property name="componentService" ref="componentService" />
+                        <property name="packageService" ref="packageService" />
+                    </bean>
+                </entry>
+                <entry key="Pages">
+                    <bean class="me.kahwah.deployer.impl.PageProcessorImpl">
+                        <property name="pageService" ref="pageService" />
+                        <property name="packageService" ref="packageService" />
+                    </bean>
+                </entry>
+                <entry key="Binaries">
+                    <bean class="me.kahwah.deployer.impl.BinaryProcessorImpl">
+                        <property name="binaryService" ref="binaryService" />
+                        <property name="packageService" ref="packageService" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+        <property name="metaDataProcessors">
+            <map>
+                <!--<entry key="ComponentPresentations">-->
+                    <!--<bean class="me.kahwah.deployer.impl.ComponentPresentationProcessorImpl">-->
+                        <!--<property name="componentDao" ref="componentDao" />-->
+                        <!--<property name="componentPresentationDao" ref="componentPresentationDao" />-->
+                    <!--</bean>-->
+                <!--</entry>-->
+            </map>
+        </property>
     </bean>
 
     <bean id="packageService" class="me.kahwah.deployer.impl.PackageServiceImpl">
         <property name="fileService" ref="fileService" />
+        <property name="dd4tSerializer" ref="dd4tSerializer" />
     </bean>
-
-
 
     <bean id="fileService"
           class="me.kahwah.deployer.impl.FileServiceImpl">
         <property name="config" ref="xmlConfig" />
     </bean>
 
-    <bean id="componentProcessor"
-            class="me.kahwah.deployer.impl.ComponentProcessorImpl">
-        <property name="componentPresentationDao" ref="componentPresentationDao" />
-        <property name="componentDao" ref="componentDao" />
-        <property name="serializer" ref="dd4tSerializer"></property>
+    <bean id="componentService" class="me.kahwah.bll.impl.ComponentServiceImpl">
+        <property name="componentDAO" ref="componentDao" />
     </bean>
 
+    <bean id="pageService" class="me.kahwah.bll.impl.PageServiceImpl">
+        <property name="pageDao" ref="pageDao" />
+    </bean>
+
+    <bean id="binaryService" class="me.kahwah.bll.impl.BinaryServiceImpl">
+        <property name="db" value="#{mongo.getDB(@dbName)}" />
+        <property name="binaryDao" ref="binaryDao" />
+    </bean>
+
+    <!-- DAOs -->
     <bean id="componentDao" class="me.kahwah.dao.impl.ComponentDAOImpl">
         <constructor-arg ref="mongo" index="0"></constructor-arg>
         <constructor-arg ref="morphia" index="1"></constructor-arg>
@@ -67,7 +95,14 @@
         <constructor-arg ref="dbName" index="2"></constructor-arg>
     </bean>
 
-    <bean id="mongo" class="com.mongodb.Mongo"></bean>
+    <bean id="binaryDao" class="me.kahwah.dao.impl.BinaryDAOImpl">
+        <constructor-arg ref="mongo" index="0"></constructor-arg>
+        <constructor-arg ref="morphia" index="1"></constructor-arg>
+        <constructor-arg ref="dbName" index="2"></constructor-arg>
+    </bean>
+    <!-- End DAOs -->
+
+    <bean id="mongo" class="com.mongodb.MongoClient"></bean>
     <bean id="morphia" class="org.mongodb.morphia.Morphia"></bean>
 
     <bean id="dd4tSerializer" class="me.kahwah.dd4t.core.serializers.impl.DefaultSerializer"></bean>
@@ -75,6 +110,7 @@
     <bean id="dbName" class="java.lang.String">
         <constructor-arg value="#{xmlConfig.getString('database')}" />
     </bean>
+
 
     <bean id="xmlConfig" class="org.apache.commons.configuration.XMLConfiguration">
         <constructor-arg type="java.lang.String">
